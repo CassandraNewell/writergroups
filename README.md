@@ -1,4 +1,5 @@
 # README
+[![Build Status](https://codeship.com/projects/2e06cb90-796f-0136-7943-1a1745bf82cc/status?branch=master)
 
 ## Project Description
 This app will allow writers to find one another and create/join writer groups. 
