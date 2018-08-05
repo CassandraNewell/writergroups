@@ -1,24 +1,10 @@
 # README
+[![Build Status](https://codeship.com/projects/2e06cb90-796f-0136-7943-1a1745bf82cc/status?branch=master)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Project Description
+This app will allow writers to find one another and create/join writer groups. 
+This breakable toy will utilize React, Rails, and several external APIs.
+Heroku: https://writergroups.herokuapp.com/
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## ER Diagram
+https://docs.google.com/drawings/d/1zepcDKhC9Mk-hVBTovL2qDCS4bKqh3e0Rih0GtfCZGY/edit
