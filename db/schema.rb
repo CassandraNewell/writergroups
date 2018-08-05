@@ -10,19 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_133651) do
+ActiveRecord::Schema.define(version: 2018_08_05_193200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "groups", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "owner", null: false
-    t.string "location", null: false
-    t.string "frequency", null: false
-    t.string "time", null: false
-    t.string "genre", null: false
+    t.integer "size_max", null: false
+    t.integer "size_min", null: false
     t.integer "intensity", null: false
+    t.string "location", null: false
+    t.string "mtg_frequency", null: false
+    t.string "mtg_datetime", null: false
+    t.string "owner", null: false
+    t.string "genre", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_groups_on_user_id"
@@ -40,13 +42,15 @@ ActiveRecord::Schema.define(version: 2018_08_05_133651) do
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.string "bio"
-    t.string "first_name"
-    t.string "last_name"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
     t.string "profile_photo"
     t.string "role", default: "member", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "group_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["group_id"], name: "index_users_on_group_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
