@@ -228,7 +228,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   factory_bot
-  foundation-rails (~> 5.0)
+  foundation-rails
   jbuilder (~> 2.5)
   jquery-rails
   launchy
