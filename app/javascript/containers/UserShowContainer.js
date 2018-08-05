@@ -9,7 +9,10 @@ class UserShowContainer extends Component {
     }
   }
 
+
+
   render(){
+    debugger
     return(
       <h1>You made it to the user show container!</h1>
     )
