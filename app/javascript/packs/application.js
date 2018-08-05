@@ -2,7 +2,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-import App from '../react/components/app'
+import App from '../app'
 import RedBox from 'redbox-react'
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -12,8 +12,11 @@ feature 'user registers', %Q{
   # * If I don't specify the required information, I am presented with
   #   an error message
 
-  xscenario 'provide valid registration information' do
+  scenario 'provide valid registration information' do
     visit new_user_registration_path
+
+    fill_in 'user_first_name', with: "Benjamin"
+    fill_in 'user_last_name', with: "Ofori-Okai"
 
     fill_in 'Email', with: 'john@example.com'
     fill_in 'Password', with: 'password'
@@ -25,7 +28,7 @@ feature 'user registers', %Q{
     expect(page).to have_content('Sign Out')
   end
 
-  xscenario 'provide invalid registration information' do
+  scenario 'provide invalid registration information' do
     visit new_user_registration_path
 
     click_button 'Sign up'
