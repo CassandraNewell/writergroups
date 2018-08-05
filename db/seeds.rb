@@ -17,3 +17,15 @@ User.create(
   role: "member",
   profile_photo: Rack::Test::UploadedFile.new(Rails.root.join('app/assets/images/user/profile-default-photo.png'), 'image/png')
 )
+
+Group.create(
+  name: ,
+  size_max: 2,
+  size_min: 1,
+  intensity: 2,
+  location: "Somerville, MA",
+  mtg_frequency: "weekly",
+  mtg_datetime: "tomorrow",
+  owner: User.first,
+  genre: "magical realism"
+)
