@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import React, { Component } from 'react'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+
+import UserShowContainer from 'containers/UserShowContainer'
 
 class App extends Component {
   constructor(props){
@@ -13,6 +15,7 @@ class App extends Component {
     return(
       <Router history={browserHistory}>
         <Route path='/'>
+          <IndexRoute component={UserShowContainer} />
 
         </Route>
       </Router>

@@ -18,11 +18,11 @@ ActiveRecord::Schema.define(version: 2018_08_05_133651) do
   create_table "groups", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "owner", null: false
-    t.string "location"
-    t.string "frequency"
-    t.string "time"
-    t.string "genre"
-    t.integer "intensity"
+    t.string "location", null: false
+    t.string "frequency", null: false
+    t.string "time", null: false
+    t.string "genre", null: false
+    t.integer "intensity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_groups_on_user_id"
