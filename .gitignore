@@ -33,3 +33,6 @@ yarn-debug.log*
 
 # Ignore `coverage` cruft
 /coverage/*
+
+# Ignore all .DS_Store files from MacOS
+.DS_Store
