@@ -30,3 +30,9 @@
 /node_modules
 yarn-debug.log*
 .yarn-integrity
+
+# Ignore `coverage` cruft
+/coverage/*
+
+# Ignore all .DS_Store files from MacOS
+.DS_Store
