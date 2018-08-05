@@ -9,6 +9,6 @@ FactoryBot.define do
     mtg_frequency "Once every so often"
 
     genre Faker::Book.genre
-    owner user
+    owner
   end
 end
