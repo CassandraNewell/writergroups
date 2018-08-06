@@ -1,5 +1,6 @@
 class Group < ApplicationRecord
-  # has_many :users
+  has_many :memberships
+  has_many :users, through: :memberships
 
   # enum intensity: {chill: -1, average: 0, intense: 1}
 

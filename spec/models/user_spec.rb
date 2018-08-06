@@ -14,6 +14,10 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
 
+    it "has member role by default" do
+      expect(user.role).to eq("member")
+    end
+
     it "is not valid without a first name" do
       expect(user_no_first_name).to_not be_valid
     end
@@ -24,6 +28,10 @@ RSpec.describe User, type: :model do
 
     it "is not valid without an email" do
       expect(user_no_email).to_not be_valid
+    end
+
+    it "is not valid without a password" do
+      expect(user_no_pw).to_not be_valid
     end
 
     it "is not valid without a role" do

@@ -6,7 +6,8 @@ class User < ApplicationRecord
 
   # mount_uploader :profile_photo, ProfilePhotoUploader
 
-  # has_many :groups
+  has_many :memberships
+  has_many :groups, through: :memberships
 
   validates :email, :role, :first_name, :last_name, :encrypted_password, presence: true
 
