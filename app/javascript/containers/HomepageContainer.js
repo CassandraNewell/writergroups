@@ -12,7 +12,7 @@ class HomepageContainer extends Component {
   }
 
   componentDidMount(){
-    fetch('api/v1/groups')
+    fetch('/api/v1/groups?scope=memberOf')
       .then(response => {
         if (response.ok) {
           return response;
