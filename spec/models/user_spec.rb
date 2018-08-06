@@ -6,12 +6,16 @@ RSpec.describe User, type: :model do
     let!(:user_no_first_name) { FactoryBot.build(:user, first_name: "") }
     let!(:user_no_last_name) { FactoryBot.build(:user, last_name: "") }
     let!(:user_no_email) { FactoryBot.build(:user, email: "") }
-    let!(:user_no_bio) { FactoryBot.build(:user, bio: "") }
-    let!(:user_no_photo) { FactoryBot.build(:user, profile_photo: "") }
+    let!(:user_no_pw) { FactoryBot.build(:user, encrypted_password: "") }
+
     let!(:user_no_role) { FactoryBot.build(:user, role: "") }
 
     it "is valid with valid attributes" do
       expect(user).to be_valid
+    end
+
+    it "has member role by default" do
+      expect(user.role).to eq("member")
     end
 
     it "is not valid without a first name" do
@@ -26,12 +30,8 @@ RSpec.describe User, type: :model do
       expect(user_no_email).to_not be_valid
     end
 
-    it "is valid without a bio" do
-      expect(user_no_bio).to be_valid
-    end
-
-    it "is valid without a profile photo" do
-      expect(user_no_photo).to be_valid
+    it "is not valid without a password" do
+      expect(user_no_pw).to_not be_valid
     end
 
     it "is not valid without a role" do

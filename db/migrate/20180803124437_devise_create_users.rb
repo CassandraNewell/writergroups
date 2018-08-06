@@ -21,13 +21,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.inet     :current_sign_in_ip
       t.inet     :last_sign_in_ip
 
-      ## Other
-      t.string :bio
-      t.string :first_name
-      t.string :last_name
-      t.string :profile_photo
-      t.string :role,               null: false, default: 'member'
-
       ## Confirmable
       # t.string   :confirmation_token
       # t.datetime :confirmed_at

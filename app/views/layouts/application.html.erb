@@ -26,9 +26,11 @@
               <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
             </li>
             <li>
+              <% if false %>
               <img
                 class="profile_pic" src="<%= current_user.profile_photo %>" alt="<%= current_user.first_name %>"
               />
+              <% end %>
             </li>
           <%- else -%>
             <li><%= link_to 'Sign Up', new_user_registration_path %></li>
