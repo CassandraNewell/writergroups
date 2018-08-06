@@ -10,7 +10,7 @@ class GroupsIndexContainer extends Component {
   }
 
   componentDidMount(){
-    fetch('/api/v1/groups')
+    fetch('/api/v1/groups?scope=notMemberOf')
       .then(response => {
         if (response.ok) {
           return response;
@@ -31,13 +31,13 @@ class GroupsIndexContainer extends Component {
     let groups
     let no_group_message = "Couldn't find any groups looking for members -- why not create one yourself?"
     if (this.state.groups === []) {
-      groups = <p> {no_group_message} </p>
+      groups = <p className="no-groups-found"> {no_group_message} </p>
     } else {
       groups = this.state.groups.map(group => {
         return(
           <GroupTile
-          key={group.id}
-          group={group}
+            key={group.id}
+            group={group}
           />
         )
       })
@@ -45,8 +45,14 @@ class GroupsIndexContainer extends Component {
 
     return(
       <div>
-        <h1> Writer Groups </h1>
-        {groups}
+        <h1> Find a Writing Group </h1>
+        <div className="grid-x">
+          <div className="cell small-12 large-8 large-offset-2 ">
+            <div className="grid-y grid-margin-y grid-padding-x">
+              {groups}
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
