@@ -36,8 +36,8 @@ class GroupsIndexContainer extends Component {
       groups = this.state.groups.map(group => {
         return(
           <GroupTile
-          key={group.id}
-          group={group}
+            key={group.id}
+            group={group}
           />
         )
       })
@@ -45,8 +45,14 @@ class GroupsIndexContainer extends Component {
 
     return(
       <div>
-        <h1> Writer Groups </h1>
-        {groups}
+        <h1> Find a Writing Group </h1>
+        <div className="grid-x">
+          <div className="cell small-12 large-6 large-offset-3 ">
+            <div className="grid-y grid-margin-y grid-padding-x">
+              {groups}
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

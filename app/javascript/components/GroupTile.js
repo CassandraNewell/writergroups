@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 
 const GroupTile = (props) => {
   return(
-    <h3> {props.group.name} </h3>
+    <div className="cell group-tile">
+      <h3> {props.group.name} </h3>
+      <p> {props.group.description}</p>
+    </div>
   )
 }
 
