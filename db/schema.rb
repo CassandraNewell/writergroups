@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_220441) do
+ActiveRecord::Schema.define(version: 2018_08_06_115941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 2018_08_05_220441) do
     t.string "location", null: false
     t.string "mtg_frequency", null: false
     t.string "mtg_datetime", null: false
-    t.string "owner", null: false
     t.string "genre", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
