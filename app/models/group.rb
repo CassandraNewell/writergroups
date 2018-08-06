@@ -1,7 +1,7 @@
 class Group < ApplicationRecord
-  has_many :users
+  # has_many :users
 
   # enum intensity: {chill: -1, average: 0, intense: 1}
 
-  validates :location, :mtg_frequency, :mtg_datetime, :genre, :intensity, presence: true
+  validates :name, :description, presence: true
 end

@@ -6,9 +6,9 @@ class User < ApplicationRecord
 
   # mount_uploader :profile_photo, ProfilePhotoUploader
 
-  has_many :groups
+  # has_many :groups
 
-  validates :email, :role, :first_name, :last_name, presence: true
+  validates :email, :role, :first_name, :last_name, :encrypted_password, presence: true
 
   def admin?
     role == "admin"
