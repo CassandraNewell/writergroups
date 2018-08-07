@@ -2,23 +2,26 @@ class Api::V1::GroupsController < ApiController
   before_action :authorize_user
 
   def authorize_user
-    if !user_signed_in? || !current_user.admin?
-      raise ActionController::RoutingError.new("Not Found")
+    if !user_signed_in?
+      raise ActionController::RoutingError.new("User is not signed in")
     end
   end
 
   def index
     if params[:scope] == "memberOf"
-      # later: only groups user is a member of
-      groups = [Group.first, Group.second]
+      payload = { groups: current_user.groups }
     elsif params[:scope] == "notMemberOf"
-      # later: only groups user is not a member of
-      groups = [Group.third, Group.last]
+      payload = {
+        groups: Group.where(
+          "id NOT IN (:incumbent_group_ids)",
+          incumbent_group_ids: current_user.groups.pluck(:id)
+        )
+      }
     else
-      groups = Group.all
+      payload = { groups: Group.all }
     end
 
-    render json: groups
+    render json: payload
   end
 
 end

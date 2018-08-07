@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router'
-import GroupTile from '../components/GroupTile'
+import MyGroupTile from '../components/MyGroupTile'
 
 
 class HomepageContainer extends Component {
@@ -25,7 +25,7 @@ class HomepageContainer extends Component {
      .then(response => response.json())
      .then(body => {
         this.setState({
-          groups: body
+          groups: body.groups
         })
       })
      .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -37,7 +37,7 @@ class HomepageContainer extends Component {
     let sign_in_warning
     let my_groups = this.state.groups.map(group => {
       return(
-        <GroupTile
+        <MyGroupTile
           key={group.id}
           group={group}
         />
@@ -49,7 +49,7 @@ class HomepageContainer extends Component {
       <div>
         <div className="grid-x">
           <div className="cell small-4">
-            <h1> Homepage </h1>
+            <h1> My Groups </h1>
           </div>
           <div className="cell small-3 small-offset-9">
             <button className="button">
