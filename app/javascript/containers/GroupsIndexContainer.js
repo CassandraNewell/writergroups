@@ -23,7 +23,7 @@ class GroupsIndexContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        this.setState({ groups: body })
+        this.setState({ groups: body.groups })
       })
       .catch(error => console.error(`Error in groups fetch: ${error.message}`));
   }

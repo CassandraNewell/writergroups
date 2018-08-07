@@ -49,7 +49,7 @@ class HomepageContainer extends Component {
       <div>
         <div className="grid-x">
           <div className="cell small-4">
-            <h1> Homepage </h1>
+            <h1> My Groups </h1>
           </div>
           <div className="cell small-3 small-offset-9">
             <button className="button">

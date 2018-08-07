@@ -9,9 +9,14 @@ class Api::V1::GroupsController < ApiController
 
   def index
     if params[:scope] == "memberOf"
-      payload = { groups: Group.where(user_id: current_user.id) }
+      payload = { groups: current_user.groups }
     elsif params[:scope] == "notMemberOf"
-      payload = { groups: Group.where.not(user_id: current_user.id) }
+      payload = {
+        groups: Group.where(
+          "id NOT IN (:incumbent_group_ids)",
+          incumbent_group_ids: current_user.groups.pluck(:id)
+        )
+      }
     else
       payload = { groups: Group.all }
     end
