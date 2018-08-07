@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import GroupTile from '../components/GroupTile'
+import FindGroupTile from '../components/FindGroupTile'
 
 class GroupsIndexContainer extends Component {
   constructor(props) {
@@ -7,6 +7,7 @@ class GroupsIndexContainer extends Component {
     this.state = {
       groups: []
     }
+    this.joinClick = this.joinClick.bind(this)
   }
 
   componentDidMount(){
@@ -20,11 +21,32 @@ class GroupsIndexContainer extends Component {
           throw(error);
         }
       })
-     .then(response => response.json())
-     .then(body => {
-        this.setState({ groups: body })
+      .then(response => response.json())
+      .then(body => {
+        this.setState({ groups: body.groups })
       })
-     .catch(error => console.error(`Error in groups fetch: ${error.message}`));
+      .catch(error => console.error(`Error in groups fetch: ${error.message}`));
+  }
+
+  joinClick(event){
+    fetch(`/api/v1/memberships?group=${event.target.dataset.id}`, {
+        method: 'POST'
+      })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+           error = new Error(errorMessage);
+          throw(error);
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        this.setState({ groups: body.groups })
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+
   }
 
   render(){
@@ -35,9 +57,10 @@ class GroupsIndexContainer extends Component {
     } else {
       groups = this.state.groups.map(group => {
         return(
-          <GroupTile
+          <FindGroupTile
             key={group.id}
             group={group}
+            joinClick={this.joinClick}
           />
         )
       })
