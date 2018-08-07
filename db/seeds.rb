@@ -22,3 +22,24 @@ User.create!(
     description: Faker::Lebowski.quote
   )
 end
+
+
+Membership.create!(
+  user: User.first,
+  group: Group.first
+)
+
+Membership.create!(
+  user: User.first,
+  group: Group.third
+)
+
+Membership.create!(
+  user: User.second,
+  group: Group.second
+)
+
+Membership.create!(
+  user: User.second,
+  group: Group.fourth
+)
