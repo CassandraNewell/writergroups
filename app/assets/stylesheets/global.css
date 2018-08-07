@@ -1,5 +1,13 @@
 .group-tile {
-  background-color: #A57AA5;
+  background-color: #B48AB4;
   border-radius: 0.5em;
   box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2)
+}
+
+.menu {
+  color: #E7F8E8
+}
+
+.top-bar a {
+  color: #E7F8E8
 }
