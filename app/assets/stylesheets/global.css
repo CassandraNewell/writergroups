@@ -1,13 +1,22 @@
 .group-tile {
-  background-color: #B48AB4;
+  background-color: #E0777D;
   border-radius: 0.5em;
   box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2)
 }
 
 .menu {
-  color: #E7F8E8
+  color: #ffffff
 }
 
 .top-bar a {
-  color: #E7F8E8
+  color: #ffffff;
+
+}
+
+.site-name {
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
+h1 {
+  font-family: Arvo, serif;
 }

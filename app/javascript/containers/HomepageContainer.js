@@ -52,7 +52,7 @@ class HomepageContainer extends Component {
             <h1> My Groups </h1>
           </div>
           <div className="cell small-3 small-offset-3">
-            <button className="button">
+            <button className="button large expand">
               <Link to="/groups" style={{color: 'white'}}>Find a group</Link>
             </button>
           </div>
