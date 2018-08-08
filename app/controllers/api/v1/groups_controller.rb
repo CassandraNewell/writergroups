@@ -24,4 +24,21 @@ class Api::V1::GroupsController < ApiController
     render json: payload
   end
 
+  def create
+    group = Group.new(group_data)
+    group.users = [current_user]
+
+    if group.save
+      payload = { groups: current_user.groups }
+    else
+      payload = { errors: group.errors.full_messages }
+    end
+
+    render json: payload
+  end
+
+  private
+  def group_data
+    params.require(:group).permit(:name, :description)
+  end
 end

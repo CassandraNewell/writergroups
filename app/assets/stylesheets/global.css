@@ -3,3 +3,9 @@
   border-radius: 0.5em;
   box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2)
 }
+
+.new-group {
+  background-color: #CCCC71;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+}
