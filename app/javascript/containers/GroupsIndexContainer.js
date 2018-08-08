@@ -67,7 +67,7 @@ class GroupsIndexContainer extends Component {
     }
 
     return(
-      <div className="cell group-tile">
+      <div className="cell">
         <h1> Find a Writing Group </h1>
         <div className="grid-x">
           <div className="cell small-12 large-8 large-offset-2 ">
