@@ -19,7 +19,6 @@ class App extends Component {
         <Route path='/'>
           <IndexRoute component={HomepageContainer} />
           <Route path='/groups' component={GroupsIndexContainer} />
-
         </Route>
       </Router>
     )

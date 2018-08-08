@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router'
 import MyGroupTile from '../components/MyGroupTile'
+import SignInTile from '../components/SignInTile'
 
 
 class HomepageContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      groups: []
+      groups: [],
+      current_user: null
     }
   }
 
@@ -25,13 +27,12 @@ class HomepageContainer extends Component {
      .then(response => response.json())
      .then(body => {
         this.setState({
-          groups: body.groups
+          groups: body.groups,
+          current_user: body.current_user
         })
       })
      .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
-
-
 
   render() {
     let sign_in_warning
@@ -44,27 +45,34 @@ class HomepageContainer extends Component {
       )
     })
 
+    let mainContent
+    if (this.state.current_user === null) {
+      mainContent = <SignInTile />
+    } else {
+      mainContent = 
+      <div className="grid-x">
+        <div className="cell small-4">
+          <h1> My Groups </h1>
+        </div>
+        <div className="cell small-3 small-offset-9">
+          <button className="button">
+            <Link to="/groups" style={{color: 'white'}}>Find a group</Link>
+          </button>
+        </div>
+      </div>
+      {sign_in_warning}
+      <div className="grid-x">
+        <div className="cell small-10 medium-8 small-offset-1 medium-offset-2">
+          <div className="grid-y grid-margin-y grid-padding-x">
+            {my_groups}
+          </div>
+        </div>
+      </div>
+    }
 
     return(
       <div>
-        <div className="grid-x">
-          <div className="cell small-4">
-            <h1> My Groups </h1>
-          </div>
-          <div className="cell small-3 small-offset-9">
-            <button className="button">
-              <Link to="/groups" style={{color: 'white'}}>Find a group</Link>
-            </button>
-          </div>
-        </div>
-        {sign_in_warning}
-        <div className="grid-x">
-          <div className="cell small-10 medium-8 small-offset-1 medium-offset-2">
-            <div className="grid-y grid-margin-y grid-padding-x">
-              {my_groups}
-            </div>
-          </div>
-        </div>
+        {mainContent}
       </div>
     )
   }
