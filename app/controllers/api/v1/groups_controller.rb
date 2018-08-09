@@ -1,5 +1,5 @@
 class Api::V1::GroupsController < ApiController
-  before_action :authorize_user
+  before_action :authorize_user, except: :index
 
   def authorize_user
     if !user_signed_in?
@@ -8,33 +8,29 @@ class Api::V1::GroupsController < ApiController
   end
 
   def index
-    memberArray = (current_user.groups + current_user.owned_groups).sort
-    if params[:scope] == "memberOf"
-      payload = {
-        groups: serializeGroupArray(memberArray)
-      }
-    elsif params[:scope] == "notMemberOf"
-      payload = Group.all - memberArray
-
-      #   groups: Group.joins(
-      #     :users
-      #   ).where.not(
-      #     users: {id: [current_user.id]}
-      #   ).where.not(
-      #     owners: {id: [current_user.id]}
-      #   ).order(
-      #     id: :asc
-      #   )
-      # }
-
-      # payload = {
-      #   groups: Group.where(
-      #     "id NOT IN (:incumbent_group_ids)",
-      #     incumbent_group_ids: current_user.groups.pluck(:id)
-      #   )
-      # }
+    if current_user
+      memberArray = (current_user.groups + current_user.owned_groups).sort
+      if params[:scope] == "memberOf"
+        payload = {
+          groups: serializeGroupArray(memberArray),
+          current_user: current_user
+        }
+      elsif params[:scope] == "notMemberOf"
+        payload = {
+          groups: serializeGroupArray(Group.all - memberArray),
+          current_user: current_user
+        }
+      else
+        payload = {
+          groups: serializeGroupArray(Group.all.order(id: :asc)),
+          current_user: current_user
+        }
+      end
     else
-      payload = { groups: serializeGroupArray(Group.all.order(id: :asc)) }
+      payload = {
+        groups: [],
+        current_user: nil
+      }
     end
 
     render json: payload
