@@ -46,7 +46,6 @@ class GroupsIndexContainer extends Component {
         this.setState({ groups: body.groups })
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`));
-
   }
 
   render(){
