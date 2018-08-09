@@ -45,7 +45,6 @@ class HomepageContainer extends Component {
       )
     })
 
-    let mainContent
     if (this.state.current_user === null) {
       return <SignInTile />
     } else {
