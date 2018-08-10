@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :memberships
   has_many :groups, through: :memberships
 
+  has_many :owned_groups, class_name: "Group", foreign_key: "owner_id"
+
   validates :email, :role, :first_name, :last_name, :encrypted_password, presence: true
 
   def admin?
