@@ -55,7 +55,6 @@ class HomepageContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      debugger
       if (body.errors) {
         errors: body.errors
       } else {
@@ -68,7 +67,6 @@ class HomepageContainer extends Component {
   }
 
   render() {
-    let sign_in_warning
     let my_groups = this.state.groups.map(group => {
       return(
         <MyGroupTile
@@ -84,7 +82,7 @@ class HomepageContainer extends Component {
       return(
         <div>
           <div className="grid-x">
-            <div className="cell small-4">
+            <div className="cell small-4 small-offset-4">
               <h1> My Groups </h1>
             </div>
             <div className="cell small-3 small-offset-9">
@@ -99,7 +97,7 @@ class HomepageContainer extends Component {
                 {my_groups}
               </div>
             </div>
-            <div>
+            <div className="cell small-10 medium-8 small-offset-1 medium-offset-2">
               <NewGroupContainer
                 onNewGroupSubmit = {this.onNewGroupSubmit}
               />

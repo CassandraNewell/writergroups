@@ -37,31 +37,10 @@ puts "****** Seeding users 3-5 ******"
 end
 
 puts "****** Seeding groups 1-5 ******"
-5.times do
+15.times do
   Group.create!(
     name: Faker::Myst.age,
     description: Faker::Lebowski.quote,
     owner_id: Random.new.rand(1..5)
   )
 end
-
-puts "****** Seeding memberships ******"
-Membership.create!(
-  user: User.first,
-  group: Group.first
-)
-
-Membership.create!(
-  user: User.first,
-  group: Group.third
-)
-
-Membership.create!(
-  user: User.second,
-  group: Group.second
-)
-
-Membership.create!(
-  user: User.second,
-  group: Group.fourth
-)

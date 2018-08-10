@@ -22,7 +22,7 @@ class Api::V1::GroupsController < ApiController
         }
       else
         payload = {
-          groups: serializeGroupArray(Group.all.order(id: :asc)),
+          groups: serializeGroupArray(Group.all.sort),
           current_user: current_user
         }
       end
@@ -41,8 +41,9 @@ class Api::V1::GroupsController < ApiController
     group.owner = current_user
 
     if group.save
-
-      payload = { groups: serializeGroupArray((current_user.groups + current_user.owned_groups).sort) }
+      payload = {
+        groups: serializeGroupArray((current_user.groups + current_user.owned_groups).sort)
+      }
     else
       payload = { errors: group.errors.full_messages }
     end
@@ -55,6 +56,7 @@ class Api::V1::GroupsController < ApiController
   end
 
   def serializeGroupArray(data)
-    ActiveModel::Serializer::ArraySerializer.new(data, each_serializer: GroupSerializer)
+    ActiveModel::Serializer::CollectionSerializer.new(data, each_serializer: GroupSerializer)
+    # ActiveModel::Serializer::ArraySerializer.new(data, each_serializer: GroupSerializer)
   end
 end
