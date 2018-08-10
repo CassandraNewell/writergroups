@@ -43,9 +43,13 @@ class GroupsIndexContainer extends Component {
       })
       .then(response => response.json())
       .then(body => {
-        this.setState({ groups: body.groups })
+        if (body.errors) {
+          this.setState({ groups: body.groups })
+        } else {
+          this.props.router.push(`/`)
+        }
       })
-      .catch(error => console.error(`Error in fetch: ${error.message}`));
+      .catch(error => console.error(`Error in join click fetch: ${error.message}`));
   }
 
   render(){
@@ -66,7 +70,7 @@ class GroupsIndexContainer extends Component {
     }
 
     return(
-      <div>
+      <div className="cell">
         <h1> Find a Writing Group </h1>
         <div className="grid-x">
           <div className="cell small-12 large-8 large-offset-2 ">

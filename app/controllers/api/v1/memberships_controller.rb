@@ -6,16 +6,12 @@ class Api::V1::MembershipsController < ApiController
     })
 
     if membership.save
-      payload = {
-        groups: Group.where(
-          "id NOT IN (:incumbent_group_ids)",
-          incumbent_group_ids: current_user.groups.pluck(:id)
-        )
-      }
+      payload = {}
     else
-      payload = { errors: membership.errors.full_messages }
+      payload = {
+        errors: membership.errors.full_messages
+      }
     end
-
     render json: payload
   end
 end

@@ -9,23 +9,20 @@ class Api::V1::GroupsController < ApiController
 
   def index
     if current_user
+      memberArray = (current_user.groups + current_user.owned_groups).sort
       if params[:scope] == "memberOf"
         payload = {
-          groups: current_user.groups,
+          groups: serializeGroupArray(memberArray),
           current_user: current_user
         }
       elsif params[:scope] == "notMemberOf"
-        other_groups = Group.where(
-          "id NOT IN (:incumbent_group_ids)",
-          incumbent_group_ids: current_user.groups.pluck(:id)
-        )
         payload = {
-          groups: other_groups,
+          groups: serializeGroupArray(Group.all - memberArray),
           current_user: current_user
         }
       else
         payload = {
-          groups: Group.all,
+          groups: serializeGroupArray(Group.all.sort),
           current_user: current_user
         }
       end
@@ -39,4 +36,27 @@ class Api::V1::GroupsController < ApiController
     render json: payload
   end
 
+  def create
+    group = Group.new(group_data)
+    group.owner = current_user
+
+    if group.save
+      payload = {
+        groups: serializeGroupArray((current_user.groups + current_user.owned_groups).sort)
+      }
+    else
+      payload = { errors: group.errors.full_messages }
+    end
+    render json: payload
+  end
+
+  private
+  def group_data
+    params.require(:group).permit(:name, :description)
+  end
+
+  def serializeGroupArray(data)
+    ActiveModel::Serializer::CollectionSerializer.new(data, each_serializer: GroupSerializer)
+    # ActiveModel::Serializer::ArraySerializer.new(data, each_serializer: GroupSerializer)
+  end
 end
