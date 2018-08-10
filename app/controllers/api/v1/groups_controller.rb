@@ -1,12 +1,6 @@
 class Api::V1::GroupsController < ApiController
   before_action :authorize_user, except: :index
 
-  def authorize_user
-    if !user_signed_in?
-      raise ActionController::RoutingError.new("User is not signed in")
-    end
-  end
-
   def index
     if current_user
       memberArray = (current_user.groups + current_user.owned_groups).sort
@@ -36,6 +30,10 @@ class Api::V1::GroupsController < ApiController
     render json: payload
   end
 
+  def show
+    render json: Group.find(params[:id])
+  end
+
   def create
     group = Group.new(group_data)
     group.owner = current_user
@@ -57,6 +55,11 @@ class Api::V1::GroupsController < ApiController
 
   def serializeGroupArray(data)
     ActiveModel::Serializer::CollectionSerializer.new(data, each_serializer: GroupSerializer)
-    # ActiveModel::Serializer::ArraySerializer.new(data, each_serializer: GroupSerializer)
+  end
+
+  def authorize_user
+    if !user_signed_in?
+      raise ActionController::RoutingError.new("User is not signed in")
+    end
   end
 end
