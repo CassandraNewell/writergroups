@@ -11,7 +11,7 @@ const GroupTile = (props) => {
         <p> {props.group.description}</p>
       </div>
       <div className="cell small-2">
-        <button className="button" data-id={props.group.id} onClick={props.joinClick}>Join Group</button>
+        <button className="button large expand" data-id={props.group.id} onClick={props.joinClick}>Join Group</button>
       </div>
     </div>
   )
