@@ -6,15 +6,12 @@ class Api::V1::MembershipsController < ApiController
     })
 
     if membership.save
-      # notMemberArray = (Group.all - current_user.groups - current_user.owned_groups).sort
-
-      payload = {
-        # groups: ActiveModel::Serializer::CollectionSerializer.new(notMemberArray, each_serializer: GroupSerializer)
-      }
+      payload = {}
     else
-      payload = { errors: membership.errors.full_messages }
+      payload = {
+        errors: membership.errors.full_messages
+      }
     end
     render json: payload
-
   end
 end
