@@ -82,10 +82,10 @@ class HomepageContainer extends Component {
       return(
         <div>
           <div className="grid-x grid-padding-x grid-padding-y">
-            <div className="cell small-4 small-offset-4">
+            <div className="cell small-4 small-offset-2">
               <h1> My Groups </h1>
             </div>
-            <div className="cell small-3 small-offset-9">
+            <div className="cell small-3 small-offset-8">
               <button className="button large expand">
                 <Link to="/groups" style={{color: 'white'}}>Find a group</Link>
               </button>
