@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   # mount_uploader :profile_photo, ProfilePhotoUploader
 
+  has_many :messages
+
   has_many :memberships
   has_many :groups, through: :memberships
 

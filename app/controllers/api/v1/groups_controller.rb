@@ -3,7 +3,7 @@ class Api::V1::GroupsController < ApiController
 
   def index
     if current_user
-      memberArray = (current_user.groups + current_user.owned_groups).sort
+      memberArray = current_user.groups + current_user.owned_groups
       if params[:scope] == "memberOf"
         payload = {
           groups: serializeGroupArray(memberArray),
@@ -16,7 +16,7 @@ class Api::V1::GroupsController < ApiController
         }
       else
         payload = {
-          groups: serializeGroupArray(Group.all.sort),
+          groups: serializeGroupArray(Group.all),
           current_user: current_user
         }
       end
@@ -31,19 +31,36 @@ class Api::V1::GroupsController < ApiController
   end
 
   def show
-    render json: Group.find(params[:id])
+    group = Group.find(params[:id])
+    binding.pry
+    group.chats = Chat.find_or_create_by(group_id: params[:id])
+
+    messages = group.chats.messages
+
+    payload = {
+      group: ActiveModel::Serializer.new(group, each_serializer: GroupSerializer),
+      messages: messages
+    }
+
+    binding.pry
+    render json: payload
   end
 
   def create
     group = Group.new(group_data)
     group.owner = current_user
+    newchat = Chat.new()
+    group.chat_id = newchat.id
+    binding.pry
 
     if group.save
       payload = {
-        groups: serializeGroupArray((current_user.groups + current_user.owned_groups).sort)
+        groups: serializeGroupArray(current_user.groups + current_user.owned_groups)
       }
     else
-      payload = { errors: group.errors.full_messages }
+      payload = {
+        errors: group.errors.full_messages
+      }
     end
     render json: payload
   end
