@@ -32,26 +32,18 @@ class Api::V1::GroupsController < ApiController
 
   def show
     group = Group.find(params[:id])
-    binding.pry
-    group.chats = Chat.find_or_create_by(group_id: params[:id])
-
-    messages = group.chats.messages
 
     payload = {
-      group: ActiveModel::Serializer.new(group, each_serializer: GroupSerializer),
-      messages: messages
+      group: GroupSerializer.new(group),
+      messages: serializeMessageArray(group.messages)
     }
 
-    binding.pry
     render json: payload
   end
 
   def create
     group = Group.new(group_data)
     group.owner = current_user
-    newchat = Chat.new()
-    group.chat_id = newchat.id
-    binding.pry
 
     if group.save
       payload = {
@@ -68,6 +60,10 @@ class Api::V1::GroupsController < ApiController
   private
   def group_data
     params.require(:group).permit(:name, :description)
+  end
+
+  def serializeMessageArray(data)
+    ActiveModel::Serializer::CollectionSerializer.new(data, each_serializer: MessageSerializer)
   end
 
   def serializeGroupArray(data)

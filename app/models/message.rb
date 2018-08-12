@@ -1,6 +1,5 @@
 class Message < ApplicationRecord
   belongs_to :user
-  belongs_to :chat
-  belongs_to :group, through: :chat
+  belongs_to :group
 
 end

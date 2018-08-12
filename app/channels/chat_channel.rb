@@ -1,6 +1,6 @@
 class ChatChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "chat_#{params[:chat_id]}"
+    stream_from "chat_#{params[:id]}"
   end
 
   def unsubscribed
@@ -10,25 +10,25 @@ class ChatChannel < ApplicationCable::Channel
   def receive(data)
     puts data
 
-    chat = Chat.find(id: params[:chat_id])
-    binding.pry
-    new_message = Message.create(
+    # create new message in backend
+    group = Group.find_by(id: params[:id])
+    new_message = Message.create({
       body: data["message"],
-      user: current_user
-    )
+      user: current_user,
+      group: group
+    })
 
-    chat.messages << new_message
+    group.messages << new_message
 
-    binding.pry
+    # binding.pry
 
-    chat_key = chat.id
-
+    # send to frontend
     chat_json = {
-      "chat_key": chat_key,
-      "message": data["message"],
-      "user": data["user"]
+      "chat_key": params[:id],
+      "message": MessageSerializer.new(new_message),
+      "user": current_user
     }
 
-    ActionCable.server.broadcast("chat_#{params[:chat_id]}", chat_json)
+    ActionCable.server.broadcast("chat_#{params[:id]}", chat_json)
   end
 end
