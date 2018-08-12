@@ -23,13 +23,14 @@ class ChatTile extends Component {
   render() {
     let messages = this.props.messages.map((message, index) => {
       return(
-        <div className="cell small-10 small-offset-1 grid-x" key={index}>
-          <p className="cell small-3"> {message.commenter_name}:</p>
-          <p className="cell small-6"> {message.body} </p>
+        <div className="cell grid-x" key={index}>
+          <p className="cell small-2"> {message.commenter_name}:</p>
+          <p className="cell small-7"> {message.body} </p>
           <p className="cell small-3"> {message.created_at_time} {message.created_at_date} </p>
         </div>
       )
     })
+
     return(
       <div>
         <div className="grid-x">
@@ -38,7 +39,12 @@ class ChatTile extends Component {
 
         <div className="grid-x">
           <form className="cell small-10 small-offset-1" onSubmit={this.onSubmit}>
-            <input type="text" name="message" placeholder="Your message here!" value={this.state.message} onChange={this.onMessageChange} />
+            <input type="text"
+              name="message"
+              placeholder="Your message here!"
+              value={this.state.message}
+              onChange={this.onMessageChange}
+            />
             <input type="submit" />
           </form>
         </div>

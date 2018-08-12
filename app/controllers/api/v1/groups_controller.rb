@@ -35,7 +35,8 @@ class Api::V1::GroupsController < ApiController
 
     payload = {
       group: GroupSerializer.new(group),
-      messages: serializeMessageArray(group.messages)
+      messages: serializeMessageArray(group.messages),
+      members: serializeMemberArray(group.users)
     }
 
     render json: payload
@@ -68,6 +69,10 @@ class Api::V1::GroupsController < ApiController
 
   def serializeGroupArray(data)
     ActiveModel::Serializer::CollectionSerializer.new(data, each_serializer: GroupSerializer)
+  end
+
+  def serializeMemberArray(data)
+    ActiveModel::Serializer::CollectionSerializer.new(data, each_serializer: UserSerializer)
   end
 
   def authorize_user
