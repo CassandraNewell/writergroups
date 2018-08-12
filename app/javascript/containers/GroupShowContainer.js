@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import ChatTile from "../components/ChatTile"
+import GroupDetailTile from "../components/GroupDetailTile"
 
 class GroupShowContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
       id: this.props.params.id,
-      name: "",
-      description: "",
-      messages: []
+      messages: [],
+      group: {},
+      members: []
     }
     this.onMessageSubmit = this.onMessageSubmit.bind(this)
   }
@@ -27,8 +28,8 @@ class GroupShowContainer extends Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        name: body.group.name,
-        description: body.group.description,
+        group: body.group,
+        members: body.members,
         messages: body.messages
       })
     })
@@ -61,15 +62,20 @@ class GroupShowContainer extends Component {
   }
 
   render() {
-    console.log("Messages in GroupShowContainer")
-    console.log(this.state.messages)
+    console.log("Members in GroupShowContainer")
+    console.log(this.state.members)
     return(
-      <div>
-        <h1>{this.state.name}</h1>
-        <p>{this.state.description}</p>
+      <div className="cell small-10 small-offset-1">
+        <h1>{this.state.group.name}</h1>
+        <GroupDetailTile
+          description={this.state.group.description}
+          owner_fullname={this.state.group.owner_fullname}
+          owner_id={this.state.group.owner_id}
+          members={this.state.members}
+        />
         <h1> Chat </h1>
         <ChatTile
-          id={this.state.id}
+          id={this.state.group.id}
           messages={this.state.messages}
           onSubmit = {this.onMessageSubmit}
         />
