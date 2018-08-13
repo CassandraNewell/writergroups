@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router'
+
 import InputTile from '../components/InputTile'
 
 class NewGroupContainer extends Component {
@@ -24,32 +26,46 @@ class NewGroupContainer extends Component {
       name: this.state.name,
       description: this.state.description
     }
-
     this.props.onNewGroupSubmit(payload)
   }
 
   render() {
     return(
-      <div className="cell">
-        <h2> Create a New Group </h2>
-        <div className="new-group grid-x">
-          <form className="cell small-10 small-offset-1"onSubmit={this.onSubmit}>
-            <InputTile
-              label="Name"
-              name="name"
-              type="text"
-              value={this.state.name}
-              onChange={this.onChange}
-            />
-            <InputTile
-              label="Description"
-              name="description"
-              type="text"
-              value={this.state.description}
-              onChange={this.onChange}
-            />
-            <input type="submit" />
+      <div className="text-center">
+        <button className="button large expand">
+          <Link to="/groups" style={{color: 'white'}}>Find a group</Link>
+        </button>
+        <hr/>
+        <div className="new-group grid-x grid-padding-x">
+          <div className="cell">
+            <h4> Create a New Group </h4>
+          </div>
+          <form className="cell" onSubmit={this.onSubmit}>
+            <div className="cell">
+              <label>Name
+                <input
+                  name="name"
+                  type="text"
+                  value={this.state.name}
+                  onChange={this.onChange}
+                />
+              </label>
+            </div>
+            <div className="cell">
+              <label>Description
+                <textarea
+                  name="description"
+                  value={this.state.description}
+                  rows="4"
+                  onChange={this.onChange}
+                />
+              </label>
+            </div>
+            <div className="cell">
+              <input type="submit" className="button expanded"/>
+            </div>
           </form>
+          <div></div>
         </div>
       </div>
     )

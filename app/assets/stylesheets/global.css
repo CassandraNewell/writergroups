@@ -1,11 +1,9 @@
-.group-tile {
-  background-color: #E0777D;
-  border-radius: 0.5em;
-  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2)
+.menu {
+  color: #ffffff;
 }
 
-.menu {
-  color: #ffffff
+.top-bar {
+  font-size: 200%;
 }
 
 .top-bar a {
@@ -20,12 +18,11 @@ h1 {
   font-family: Arvo, serif;
 }
 
-.new-group {
-  background-color: #CCCC71;
-  border-radius: 0.5em;
-  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
-}
-
 label {
   color: #ffffff;
+  font-size: 115%;
+}
+
+.text-center {
+  margin: auto;
 }
