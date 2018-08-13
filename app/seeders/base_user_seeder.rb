@@ -1,4 +1,4 @@
-class AdminSeeder
+class BaseUserSeeder
   USERS = [
     {
       first_name: "Cassandra",
