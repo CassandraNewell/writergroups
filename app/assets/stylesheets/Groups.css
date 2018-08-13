@@ -1,0 +1,19 @@
+.group-tile {
+  background-color: #678999;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.8);
+  padding: 1.5em;
+  color: white
+}
+
+.group-tile a {
+  color: white
+}
+
+.new-group {
+  background-color: #899967;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2);
+  padding-top: 0.5em;
+  color: white
+}

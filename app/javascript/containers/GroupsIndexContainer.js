@@ -70,14 +70,10 @@ class GroupsIndexContainer extends Component {
     }
 
     return(
-      <div className="cell">
+      <div className="text-center">
         <h1> Find a Writing Group </h1>
-        <div className="grid-x">
-          <div className="cell small-12 large-8 large-offset-2 ">
-            <div className="grid-y grid-margin-y grid-padding-x">
-              {groups}
-            </div>
-          </div>
+        <div className="grid-x grid-margin-x grid-margin-y small-up-1 medium-up-2">
+          {groups}
         </div>
       </div>
     )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router'
 import MyGroupTile from '../components/MyGroupTile'
-import NewGroupContainer from '../containers/NewGroupContainer'
+import MyGroupsContainer from './MyGroupsContainer'
 import SignInTile from '../components/SignInTile'
 
 
@@ -67,43 +67,15 @@ class HomepageContainer extends Component {
   }
 
   render() {
-    let my_groups = this.state.groups.map(group => {
-      return(
-        <MyGroupTile
-          key={group.id}
-          group={group}
-        />
-      )
-    })
-
+    console.log(this.state.current_user)
     if (this.state.current_user === null) {
       return <SignInTile />
     } else {
-      return(
-        <div>
-          <div className="grid-x grid-padding-x grid-padding-y">
-            <div className="cell small-4 small-offset-2">
-              <h1> My Groups </h1>
-            </div>
-            <div className="cell small-3 small-offset-8">
-              <button className="button large expand">
-                <Link to="/groups" style={{color: 'white'}}>Find a group</Link>
-              </button>
-            </div>
-          </div>
-          <div className="grid-x">
-            <div className="cell small-10 medium-8 small-offset-1 medium-offset-2">
-              <div className="grid-y grid-margin-y grid-padding-x">
-                {my_groups}
-              </div>
-            </div>
-            <div className="cell small-10 medium-8 small-offset-1 medium-offset-2">
-              <NewGroupContainer
-                onNewGroupSubmit = {this.onNewGroupSubmit}
-              />
-            </div>
-          </div>
-        </div>
+      return (
+        <MyGroupsContainer
+          groups= {this.state.groups}
+          onNewGroupSubmit = {this.onNewGroupSubmit}
+        />
       )
     }
   }

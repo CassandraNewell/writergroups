@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 const GroupDetailTile = props => {
 
   let members
-  debugger
   if (props.members) {
     members= props.members.map(member => {
       return(
