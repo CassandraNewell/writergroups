@@ -8,6 +8,7 @@ class MessageSerializer < ActiveModel::Serializer
   def created_at_date
     object.created_at.strftime("%B %d, %Y")
   end
+
   def created_at_time
     object.created_at.strftime("%l:%M %p")
   end

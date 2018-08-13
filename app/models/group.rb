@@ -4,6 +4,8 @@ class Group < ApplicationRecord
 
   has_many :messages
 
+  has_many :meetings
+
   belongs_to :owner, class_name: "User"
 
   validates :name, :description, presence: true
