@@ -1,12 +1,14 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::GroupsController, type: :controller do
-  let!(:group1) { FactoryBot.create(:group) }
-  # let!(:group2) { FactoryBot.create(:group) }
-  let!(:admin) { FactoryBot.create(:user, role: "admin") }
+  let!(:user1) { FactoryBot.create(:user) }
+  let!(:user2) { FactoryBot.create(:user, email: "somethingelse@sharklasers.com") }
+  let!(:admin) { FactoryBot.create(:user, role: "admin", email: "somethingelseagainrs@sharklasers.com") }
+  let!(:group1) { FactoryBot.create(:group, owner: user1) }
+  let!(:group2) { FactoryBot.create(:group, owner: user2) }
 
 
-  xdescribe "GET#index" do
+  describe "GET#index" do
     it "should return a list of all groups" do
 
       sign_in admin
@@ -16,9 +18,10 @@ RSpec.describe Api::V1::GroupsController, type: :controller do
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")
 
-      expect(returned_json.length).to eq 1
+      expect(returned_json.length).to eq 2
       expect(returned_json["groups"][0]["name"]).to eq group1.name
       expect(returned_json["groups"][1]["name"]).to eq group2.name
+      expect(returned_json["current_user"]["first_name"]).to eq admin.first_name
     end
   end
 end
