@@ -27,6 +27,10 @@ class NewGroupContainer extends Component {
       description: this.state.description
     }
     this.props.onNewGroupSubmit(payload)
+    this.setState({
+      name: "",
+      description: ""
+    })
   }
 
   render() {

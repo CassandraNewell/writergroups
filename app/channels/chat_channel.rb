@@ -20,8 +20,6 @@ class ChatChannel < ApplicationCable::Channel
 
     group.messages << new_message
 
-    # binding.pry
-
     # send to frontend
     chat_json = {
       "chat_key": params[:id],
