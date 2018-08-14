@@ -28,18 +28,21 @@ class MyGroupsContainer extends Component {
 
           <div>
             <div className="text-center">
+              <br/>
               <h1> My Groups </h1>
+              <br/>
+              <br/>
             </div>
           </div>
 
           <div className="grid-x grid-padding-x">
-            <div className="cell small-9">
-              <div className="grid-x grid-margin-x grid-margin-y small-up-1 medium-up-2">
+            <div className="cell small-8">
+              <div className="grid-y grid-margin-y">
                 {my_groups}
               </div>
             </div>
 
-            <div className="cell small-3">
+            <div className="cell small-4">
               <NewGroupContainer
                 onNewGroupSubmit = {this.props.onNewGroupSubmit}
                 />

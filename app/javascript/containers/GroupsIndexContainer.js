@@ -71,7 +71,10 @@ class GroupsIndexContainer extends Component {
 
     return(
       <div className="text-center">
+        <br/>
         <h1> Find a Writing Group </h1>
+        <br/>
+        <br/>
         <div className="grid-x grid-margin-x grid-margin-y small-up-1 medium-up-2">
           {groups}
         </div>

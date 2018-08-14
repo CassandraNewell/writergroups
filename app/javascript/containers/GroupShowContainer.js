@@ -62,23 +62,29 @@ class GroupShowContainer extends Component {
   }
 
   render() {
-    console.log("Members in GroupShowContainer")
-    console.log(this.state.members)
     return(
-      <div className="cell small-10 small-offset-1">
-        <h1>{this.state.group.name}</h1>
-        <GroupDetailTile
-          description={this.state.group.description}
-          owner_fullname={this.state.group.owner_fullname}
-          owner_id={this.state.group.owner_id}
-          members={this.state.members}
-        />
-        <h1> Chat </h1>
-        <ChatTile
-          id={this.state.group.id}
-          messages={this.state.messages}
-          onSubmit = {this.onMessageSubmit}
-        />
+      <div>
+        <div className="text-center">
+          <h1>{this.state.group.name}</h1>
+        </div>
+        <div className="grid-x grid-margin-x">
+          <div className="cell small-6">
+            <GroupDetailTile
+              description={this.state.group.description}
+              owner_fullname={this.state.group.owner_fullname}
+              owner_id={this.state.group.owner_id}
+              members={this.state.members}
+              />
+          </div>
+          <div className="cell small-6 chat-container">
+            <h4 className="text-center"> Chat </h4>
+            <ChatTile
+              id={this.state.group.id}
+              messages={this.state.messages}
+              onSubmit = {this.onMessageSubmit}
+              />
+          </div>
+        </div>
       </div>
     )
   }

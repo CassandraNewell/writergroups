@@ -13,9 +13,9 @@ const GroupDetailTile = props => {
   }
 
   return (
-    <div>
-      <p> Description: {props.description} </p>
-      <p> Owner: {props.owner_fullname}</p>
+    <div className="group-tile">
+      <p> <b>Description:</b> {props.description} </p>
+      <p> <b>Owner:</b> {props.owner_fullname}</p>
       <h4> Members: </h4>
       <ul>
         {members}
