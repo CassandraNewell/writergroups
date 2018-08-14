@@ -13,12 +13,13 @@
 </head>
 <body>
   <div>
-    <nav class="top-bar">
+    <nav class="top-bar stacked-for-medium">
       <ul class="menu">
         <li class="menu-text site-name">WriterGroups</li>
-        <li class="name">
-          <a href="/">My Groups</a>
-        </li>
+        <%- if current_user -%>
+          <li><%= link_to 'My Groups', new_user_registration_path %></li>
+          <li><%= link_to 'Join a Group', root_path %></li>
+        <%- end -%>
       </ul>
 
       <section class="top-bar-right">
@@ -43,12 +44,13 @@
     </nav>
   </div>
 
-  <%- flash.each do |key, value| -%>
-    <div class="flash flash-<%= key %>">
-      <%= value %>
-    </div>
-  <%- end -%>
-
+  <div id="flash-messages">
+    <%- flash.each do |name, msg| -%>
+      <div data-alert style="text-align" class="alert-box flash flash-<%= name %>">
+        <%= content_tag :div, msg %>
+      </div>
+    <%- end -%>
+  </div>
 
   <div>
     <%= yield %>

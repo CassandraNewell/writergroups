@@ -15,6 +15,17 @@ class App extends Component {
   }
 
   render() {
+    $(function(){
+      var flashDurationInSeconds = 5;
+      var flashContainerId = 'flash-messages';
+
+      function removeFlashMessages() {
+        $('#' + flashContainerId).remove();
+      }
+
+      setTimeout(removeFlashMessages, flashDurationInSeconds * 1000);
+    })
+    
     return(
       <Router history={browserHistory}>
         <Route path='/'>
