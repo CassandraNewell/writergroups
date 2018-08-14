@@ -8,6 +8,7 @@
 
 .top-bar a {
   color: #ffffff;
+  font-size: 80%
 }
 
 .site-name {
@@ -25,4 +26,10 @@ label {
 
 .text-center {
   margin: auto;
+}
+
+.flash {
+  font-size: medium;
+  background: #996789;
+  text-align: center;
 }
