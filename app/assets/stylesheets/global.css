@@ -33,3 +33,7 @@ label {
   background: #996789;
   text-align: center;
 }
+
+p {
+  font-size: 110%
+}
