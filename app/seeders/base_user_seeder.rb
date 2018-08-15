@@ -8,9 +8,9 @@ class BaseUserSeeder
       role: "admin"
     },
     {
-      first_name: "Kara",
-      last_name: "Manke",
-      email: "cassandra.newell@pm.me",
+      first_name: "David",
+      last_name: "Heinemeier Hansson",
+      email: "dhh@sharklasers.com",
       password: "jjjjjj"
     }
   ]
