@@ -12,7 +12,7 @@ class ChatTile extends Component {
 
   onSubmit(event) {
     event.preventDefault()
-    this.props.onSubmit(this.state.message)
+    this.props.onMessageSubmit(this.state.message)
     this.setState({ message: '' })
   }
 
