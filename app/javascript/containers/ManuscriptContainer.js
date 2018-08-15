@@ -85,9 +85,7 @@ class ManuscriptContainer extends Component {
                 <aside>
                   <h6>Dropped files</h6>
                   <ul>
-                    {
-                      <li key={this.state.file.name}>{this.state.file.name} - {this.state.file.size} bytes</li>
-                    }
+                    <li key={this.state.file.name}>None yet!</li>
                   </ul>
                 </aside>
               </section>
