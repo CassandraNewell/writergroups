@@ -36,7 +36,8 @@ class Api::V1::GroupsController < ApiController
     payload = {
       group: GroupSerializer.new(group),
       messages: serializeMessageArray(group.messages),
-      members: serializeMemberArray(group.users)
+      members: serializeMemberArray(group.users),
+      manuscripts: group.manuscripts
     }
 
     render json: payload

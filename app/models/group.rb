@@ -3,6 +3,7 @@ class Group < ApplicationRecord
   has_many :users, through: :memberships
 
   has_many :messages
+  has_many :manuscripts
 
   has_many :meetings
 

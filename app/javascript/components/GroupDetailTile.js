@@ -13,7 +13,7 @@ const GroupDetailTile = props => {
   }
 
   return (
-    <div className="group-tile">
+    <div>
       <p> <b>Description:</b> {props.description} </p>
       <p> <b>Owner:</b> {props.owner_fullname}</p>
       <h4> Members: </h4>

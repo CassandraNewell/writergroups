@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ChatTile from "../components/ChatTile"
 import GroupDetailTile from "../components/GroupDetailTile"
-import ManuscriptTile from "../components/ManuscriptTile"
+import ManuscriptContainer from "./ManuscriptContainer"
 
 class GroupShowContainer extends Component {
   constructor(props) {
@@ -11,7 +11,24 @@ class GroupShowContainer extends Component {
       messages: [],
       group: {},
       members: [],
-      manuscripts: []
+      manuscripts: [
+        {
+          id: 1,
+          title: "Super rough draft",
+          description: "This is a really rough draft of that thing I was talking about",
+          user: {
+            fullname: "John Smith"
+          }
+        },
+        {
+          id: 2,
+          title: "One is the loneliest number",
+          description: "A short story. Would particularly appreciate feedback about pacing! Thanks all.",
+          user: {
+            fullname: "Sarah Johnson"
+          }
+        }
+      ]
     }
     this.onMessageSubmit = this.onMessageSubmit.bind(this)
     this.onManuscriptSubmit = this.onManuscriptSubmit.bind(this)
@@ -63,7 +80,25 @@ class GroupShowContainer extends Component {
   }
 
   onManuscriptSubmit(payload) {
-    console.log("Button pushed!")
+    console.log("hi")
+    fetch('/groups', {
+      method: 'POST',
+      body: payload
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+         error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      console.log("hi again")
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render() {
@@ -73,14 +108,14 @@ class GroupShowContainer extends Component {
           <h1>{this.state.group.name}</h1>
         </div>
         <div className="grid-x grid-margin-x">
-          <div className="cell small-6">
+          <div className="cell small-6 group-tile">
             <GroupDetailTile
               description={this.state.group.description}
               owner_fullname={this.state.group.owner_fullname}
               owner_id={this.state.group.owner_id}
               members={this.state.members}
             />
-            <ManuscriptTile
+            <ManuscriptContainer
               manuscripts={this.state.manuscripts}
               onManuscriptSubmit={this.onManuscriptSubmit}
             />
@@ -90,7 +125,7 @@ class GroupShowContainer extends Component {
             <ChatTile
               id={this.state.group.id}
               messages={this.state.messages}
-              onSubmit = {this.onMessageSubmit}
+              onMessageSubmit = {this.onMessageSubmit}
               />
           </div>
         </div>
