@@ -1,4 +1,7 @@
 CarrierWave.configure do |config|
+
+  config.fog_provider = 'fog/aws'                        # required
+
   if !Rails.env.test?
     config.fog_credentials = {
       provider: "AWS",
