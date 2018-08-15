@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ChatTile from "../components/ChatTile"
 import GroupDetailTile from "../components/GroupDetailTile"
+import ManuscriptTile from "../components/ManuscriptTile"
 
 class GroupShowContainer extends Component {
   constructor(props) {
@@ -9,9 +10,11 @@ class GroupShowContainer extends Component {
       id: this.props.params.id,
       messages: [],
       group: {},
-      members: []
+      members: [],
+      manuscripts: []
     }
     this.onMessageSubmit = this.onMessageSubmit.bind(this)
+    this.onManuscriptSubmit = this.onManuscriptSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -53,12 +56,14 @@ class GroupShowContainer extends Component {
   }
 
   onMessageSubmit(payload) {
-    console.log('Submit payload')
-    console.log(payload)
     App.ChatChannel.send({
       message: payload,
       group_id: this.state.id
     })
+  }
+
+  onManuscriptSubmit(payload) {
+    console.log("Button pushed!")
   }
 
   render() {
@@ -74,7 +79,11 @@ class GroupShowContainer extends Component {
               owner_fullname={this.state.group.owner_fullname}
               owner_id={this.state.group.owner_id}
               members={this.state.members}
-              />
+            />
+            <ManuscriptTile
+              manuscripts={this.state.manuscripts}
+              onManuscriptSubmit={this.onManuscriptSubmit}
+            />
           </div>
           <div className="cell small-6 chat-container">
             <h4 className="text-center"> Chat </h4>
