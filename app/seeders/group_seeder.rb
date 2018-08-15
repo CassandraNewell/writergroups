@@ -1,11 +1,30 @@
 class GroupSeeder
 
+  GROUPS = [
+    {
+      name: "Fantasyists",
+      description: "We write about unicorns and bicorns and such"
+    },
+    {
+      name: "Crimelords",
+      description: "Come share your thinly veiled murder fantasies"
+    },
+    {
+      name: "Literary writers",
+      description: "Why yes, we do think we're better than everyone else"
+    },
+    {
+      name: "Graphic novels",
+      description: '(╯°□°）╯︵ ┻━┻ ||| ┬─┬ノ( ゜-゜ノ) ||| (╯°□°）╯︵ /(.□ . \)'
+    }
+  ]
+
   def self.seed!
-    10.times do |index|
+    GROUPS.each.with_index do |group, index|
       puts "*** Group ##{index + 1} ***"
-      newgroup = Group.create!(
-        name: Faker::Myst.age,
-        description: Faker::Lebowski.quote,
+      Group.create!(
+        name: group[:name],
+        description: group[:description],
         owner_id: Random.new.rand(1..5)
       )
     end
