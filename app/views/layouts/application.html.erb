@@ -17,8 +17,8 @@
       <ul class="menu">
         <li class="menu-text site-name">WriterGroups</li>
         <%- if current_user -%>
-          <li><%= link_to 'My Groups', new_user_registration_path %></li>
-          <li><%= link_to 'Join a Group', root_path %></li>
+          <li><%= link_to 'My Groups', root_path %></li>
+          <li><%= link_to 'Join a Group', groups_path %></li>
         <%- end -%>
       </ul>
 

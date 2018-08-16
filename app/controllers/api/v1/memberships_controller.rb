@@ -4,7 +4,7 @@ class Api::V1::MembershipsController < ApiController
       user: current_user,
       group_id: params[:group]
     })
-
+    
     if membership.save
       payload = {}
     else
