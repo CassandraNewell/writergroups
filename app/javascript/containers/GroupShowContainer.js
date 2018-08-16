@@ -11,24 +11,7 @@ class GroupShowContainer extends Component {
       messages: [],
       group: {},
       members: [],
-      manuscripts: [
-        {
-          id: 1,
-          title: "Super rough draft",
-          description: "This is a really rough draft of that thing I was talking about",
-          user: {
-            fullname: "John Smith"
-          }
-        },
-        {
-          id: 2,
-          title: "One is the loneliest number",
-          description: "A short story. Would particularly appreciate feedback about pacing! Thanks all.",
-          user: {
-            fullname: "Sarah Johnson"
-          }
-        }
-      ]
+      manuscripts: []
     }
     this.onMessageSubmit = this.onMessageSubmit.bind(this)
     this.onManuscriptSubmit = this.onManuscriptSubmit.bind(this)
@@ -50,7 +33,8 @@ class GroupShowContainer extends Component {
       this.setState({
         group: body.group,
         members: body.members,
-        messages: body.messages
+        messages: body.messages,
+        manuscripts: body.manuscripts
       })
     })
     .catch(error => console.error(`Error in group show fetch: \n${error.message}`));
@@ -80,10 +64,13 @@ class GroupShowContainer extends Component {
   }
 
   onManuscriptSubmit(payload) {
-    console.log("hi")
-    fetch('/groups', {
+    console.log("POST payload")
+    console.log(payload)
+
+    fetch(`/api/v1/manuscripts`, {
       method: 'POST',
-      body: payload
+      body: payload,
+      credentials: "same-origin",
     })
     .then(response => {
       if (response.ok) {
@@ -97,6 +84,9 @@ class GroupShowContainer extends Component {
     .then(response => response.json())
     .then(body => {
       console.log("hi again")
+      this.setState({
+        manuscripts: this.state.manuscripts.concat(body.manuscript)
+      })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -116,6 +106,7 @@ class GroupShowContainer extends Component {
               members={this.state.members}
             />
             <ManuscriptContainer
+              group_id={this.state.group.id}
               manuscripts={this.state.manuscripts}
               onManuscriptSubmit={this.onManuscriptSubmit}
             />
