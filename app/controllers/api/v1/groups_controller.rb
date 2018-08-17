@@ -31,15 +31,14 @@ class Api::V1::GroupsController < ApiController
     group.owner = current_user
 
     if group.save
-      payload = {
+      render json: {
         groups: serializeArray(current_user.assoc_groups, GroupSerializer)
       }
     else
-      payload = {
+      render json: {
         errors: group.errors.full_messages
       }
     end
-    render json: payload
   end
 
   private

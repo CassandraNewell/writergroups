@@ -64,9 +64,6 @@ class GroupShowContainer extends Component {
   }
 
   onManuscriptSubmit(payload) {
-    console.log("POST payload")
-    console.log(payload)
-
     fetch(`/api/v1/manuscripts`, {
       method: 'POST',
       body: payload,

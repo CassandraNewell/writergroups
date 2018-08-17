@@ -22,11 +22,15 @@ class NewGroupContainer extends Component {
 
   onSubmit(event) {
     event.preventDefault()
-    let payload = {
-      name: this.state.name,
-      description: this.state.description
-    }
-    this.props.postNewGroup(payload)
+    this.props.groupFetch(
+      '/api/v1/groups',
+      {
+        method: 'POST',
+        body: JSON.stringify(this.state),
+        credentials: "same-origin",
+        headers: {"Content-Type": "application/json"}
+      }
+    )
     this.setState({
       name: "",
       description: ""
@@ -36,14 +40,20 @@ class NewGroupContainer extends Component {
   render() {
     return(
       <div className="text-center">
+
         <button className="button large expand">
-          <Link to="/groups" style={{color: 'white'}}>Find a group</Link>
+          <Link to="/groups" style={{color: 'white'}}>
+            Find a group
+          </Link>
         </button>
+
         <hr/>
+
         <div className="new-group grid-x grid-padding-x">
           <div className="cell">
             <h4> Create a New Group </h4>
           </div>
+
           <form className="cell" onSubmit={this.onSubmit}>
             <div className="cell">
               <label>Name
@@ -69,7 +79,7 @@ class NewGroupContainer extends Component {
               <input type="submit" className="button expanded"/>
             </div>
           </form>
-          <div></div>
+
         </div>
       </div>
     )

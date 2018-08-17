@@ -11,7 +11,6 @@ class HomepageContainer extends Component {
     // current_user has dummy value to distinguish first render from
     // no-current_user render (see render block)
     this.state = {
-      groups: [],
       current_user: "first_render_user",
       errors: []
     }
@@ -30,9 +29,13 @@ class HomepageContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      this.setState({
-        current_user: body.current_user
-      })
+      if (body.errors) {
+        this.setState({ errors: body.errors })
+      } else {
+        this.setState({
+          current_user: body.current_user
+        })
+      }
     })
     .catch(error => console.error(`Fetch error: ${error.message}`));
   }
@@ -51,7 +54,7 @@ class HomepageContainer extends Component {
       returnPage =
         <MyGroupsContainer
           groups= {this.state.groups}
-          postNewGroup = {this.postNewGroup}
+          groupFetch = {this.groupFetch}
         />
     }
 
