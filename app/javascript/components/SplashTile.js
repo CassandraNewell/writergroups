@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-const SignInTile = (props) => {
+const SplashTile = (props) => {
   return(
     <div className="hero-full-screen grid-x grid-x-padding">
       <div className="middle-content-section cell small-6 small-offset-3 grid-y grid-padding-y">
@@ -23,4 +23,4 @@ const SignInTile = (props) => {
   )
 }
 
-export default SignInTile
+export default SplashTile

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Link} from 'react-router'
 import MyGroupsContainer from './MyGroupsContainer'
 import MyGroupTile from '../components/MyGroupTile'
-import SignInTile from '../components/SignInTile'
+import SplashTile from '../components/SplashTile'
 
 class HomepageContainer extends Component {
   constructor(props){
@@ -74,13 +74,13 @@ class HomepageContainer extends Component {
     if (current_user === "first_render_user") {
       returnPage = <div></div>
     } else if (current_user === null) {
-      returnPage = <SignInTile />
+      returnPage = <SplashTile />
     } else {
       returnPage =
-      <MyGroupsContainer
-        groups= {this.state.groups}
-        postNewGroup = {this.postNewGroup}
-      />
+        <MyGroupsContainer
+          groups= {this.state.groups}
+          postNewGroup = {this.postNewGroup}
+        />
     }
 
     return( <div> {returnPage} </div> )
