@@ -44,7 +44,7 @@ class MyGroupsContainer extends Component {
 
             <div className="cell small-4">
               <NewGroupContainer
-                onNewGroupSubmit = {this.props.onNewGroupSubmit}
+                postNewGroup = {this.props.postNewGroup}
                 />
             </div>
           </div>

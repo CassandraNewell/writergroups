@@ -26,7 +26,7 @@ class NewGroupContainer extends Component {
       name: this.state.name,
       description: this.state.description
     }
-    this.props.onNewGroupSubmit(payload)
+    this.props.postNewGroup(payload)
     this.setState({
       name: "",
       description: ""
