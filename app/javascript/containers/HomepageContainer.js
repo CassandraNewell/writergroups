@@ -8,9 +8,10 @@ import SignInTile from '../components/SignInTile'
 class HomepageContainer extends Component {
   constructor(props){
     super(props)
+    // current_user has dummy value to distinguish first render from no-current_user render (see render block)
     this.state = {
       groups: [],
-      current_user: null,
+      current_user: "first_render_user",
       errors: []
     }
     this.onNewGroupSubmit = this.onNewGroupSubmit.bind(this)
@@ -67,17 +68,27 @@ class HomepageContainer extends Component {
   }
 
   render() {
-    console.log(this.state.current_user)
-    if (this.state.current_user === null) {
-      return <SignInTile />
+    let current_user = this.state.current_user
+
+    // Display empty page upon first render to avoid flashing dark background on first render when user is signed in
+    let returnPage
+    if (current_user === "first_render_user") {
+      returnPage = <div></div>
+    } else if (current_user === null) {
+      returnPage = <SignInTile />
     } else {
-      return (
-        <MyGroupsContainer
-          groups= {this.state.groups}
-          onNewGroupSubmit = {this.onNewGroupSubmit}
-        />
-      )
+      returnPage =
+      <MyGroupsContainer
+        groups= {this.state.groups}
+        onNewGroupSubmit = {this.onNewGroupSubmit}
+      />
     }
+
+    return(
+      <div>
+        {returnPage}
+      </div>
+    )
   }
 }
 
