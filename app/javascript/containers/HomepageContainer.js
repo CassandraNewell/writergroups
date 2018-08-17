@@ -8,7 +8,8 @@ class HomepageContainer extends Component {
   constructor(props){
     super(props)
 
-    // current_user has dummy value to distinguish first render from no-current_user render (see render block)
+    // current_user has dummy value to distinguish first render from
+    // no-current_user render (see render block)
     this.state = {
       groups: [],
       current_user: "first_render_user",
@@ -36,7 +37,7 @@ class HomepageContainer extends Component {
         current_user: body.current_user
       })
     })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
+    .catch(error => console.error(`Fetch error: ${error.message}`));
   }
 
   postNewGroup(payload) {
@@ -63,13 +64,14 @@ class HomepageContainer extends Component {
         this.setState({ groups: body.groups })
       }
     })
-    .catch(error => console.error(`Error in group POST fetch: ${error.message}`));
+    .catch(error => console.error(`Fetch error: ${error.message}`));
   }
 
   render() {
     let current_user = this.state.current_user
 
-    // Display empty page on first render to avoid flashing dark background as first render before light background in second render
+    // Display empty page on first render to avoid flashing dark background as
+    // first render before light background in second render
     let returnPage
     if (current_user === "first_render_user") {
       returnPage = <div></div>
