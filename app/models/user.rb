@@ -19,4 +19,8 @@ class User < ApplicationRecord
   def admin?
     role == "admin"
   end
+
+  def assoc_groups
+    self.groups + self.owned_groups
+  end
 end

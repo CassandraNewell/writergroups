@@ -1,33 +1,16 @@
 class Api::V1::GroupsController < ApiController
-  before_action :authorize_user, except: :index
+  before_action :authorize_user
 
   def index
-    if current_user
-      memberArray = current_user.groups + current_user.owned_groups
-      if params[:scope] == "memberOf"
-        payload = {
-          groups: serializeGroupArray(memberArray),
-          current_user: current_user
-        }
-      elsif params[:scope] == "notMemberOf"
-        payload = {
-          groups: serializeGroupArray(Group.all - memberArray),
-          current_user: current_user
-        }
-      else
-        payload = {
-          groups: serializeGroupArray(Group.all),
-          current_user: current_user
-        }
-      end
+    if params[:scope] == "memberOf"
+      selectedGroups = current_user.assoc_groups
+    elsif params[:scope] == "notMemberOf"
+      selectedGroups = Group.all - current_user.assoc_groups
     else
-      payload = {
-        groups: [],
-        current_user: nil
-      }
+      selectedGroups = Group.all
     end
 
-    render json: payload
+    render json: {groups: serializeArray(selectedGroups, GroupSerializer)}
   end
 
   def show
@@ -35,8 +18,8 @@ class Api::V1::GroupsController < ApiController
 
     payload = {
       group: GroupSerializer.new(group),
-      messages: serializeMessageArray(group.messages),
-      members: serializeMemberArray(group.users),
+      messages: serializeArray(group.messages, MessageSerializer),
+      members: serializeArray(group.users, UserSerializer),
       manuscripts: group.manuscripts
     }
 
@@ -49,7 +32,7 @@ class Api::V1::GroupsController < ApiController
 
     if group.save
       payload = {
-        groups: serializeGroupArray(current_user.groups + current_user.owned_groups)
+        groups: serializeArray(current_user.assoc_groups, GroupSerializer)
       }
     else
       payload = {
@@ -64,16 +47,8 @@ class Api::V1::GroupsController < ApiController
     params.require(:group).permit(:name, :description)
   end
 
-  def serializeMessageArray(data)
-    ActiveModel::Serializer::CollectionSerializer.new(data, each_serializer: MessageSerializer)
-  end
-
-  def serializeGroupArray(data)
-    ActiveModel::Serializer::CollectionSerializer.new(data, each_serializer: GroupSerializer)
-  end
-
-  def serializeMemberArray(data)
-    ActiveModel::Serializer::CollectionSerializer.new(data, each_serializer: UserSerializer)
+  def serializeArray(data, serializer)
+    ActiveModel::Serializer::CollectionSerializer.new(data, each_serializer: serializer)
   end
 
   def authorize_user

@@ -15,8 +15,6 @@ class HomepageContainer extends Component {
       current_user: "first_render_user",
       errors: []
     }
-
-    this.postNewGroup = this.postNewGroup.bind(this)
   }
 
   componentDidMount(){
@@ -33,36 +31,8 @@ class HomepageContainer extends Component {
     .then(response => response.json())
     .then(body => {
       this.setState({
-        groups: body.groups,
         current_user: body.current_user
       })
-    })
-    .catch(error => console.error(`Fetch error: ${error.message}`));
-  }
-
-  postNewGroup(payload) {
-    fetch('/api/v1/groups', {
-      method: 'POST',
-      body: JSON.stringify(payload),
-      credentials: "same-origin",
-      headers: {"Content-Type": "application/json"}
-    })
-    .then(response => {
-      if (response.ok) {
-        return response;
-      } else {
-        let errorMessage = `${response.status} (${response.statusText})`,
-         error = new Error(errorMessage);
-        throw(error);
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      if (body.errors) {
-        this.setState({ errors: body.errors })
-      } else {
-        this.setState({ groups: body.groups })
-      }
     })
     .catch(error => console.error(`Fetch error: ${error.message}`));
   }
