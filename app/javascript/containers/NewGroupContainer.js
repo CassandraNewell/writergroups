@@ -55,7 +55,6 @@ class NewGroupContainer extends Component {
           </div>
 
           <form className="cell" onSubmit={this.onSubmit}>
-            <div className="cell">
               <label>Name
                 <input
                   name="name"
@@ -64,8 +63,6 @@ class NewGroupContainer extends Component {
                   onChange={this.onChange}
                 />
               </label>
-            </div>
-            <div className="cell">
               <label>Description
                 <textarea
                   name="description"
@@ -74,8 +71,7 @@ class NewGroupContainer extends Component {
                   onChange={this.onChange}
                 />
               </label>
-            </div>
-            <div className="cell">
+            <div className="">
               <input type="submit" className="button expanded"/>
             </div>
           </form>

@@ -8,8 +8,8 @@ class HomepageContainer extends Component {
   constructor(props){
     super(props)
 
-    // current_user has dummy value to distinguish first render from
-    // no-current_user render (see render block)
+    // current_user has dummy value to distinguish first render
+    // from no-current_user render (see render block)
     this.state = {
       current_user: "first_render_user",
       errors: []
@@ -32,9 +32,7 @@ class HomepageContainer extends Component {
       if (body.errors) {
         this.setState({ errors: body.errors })
       } else {
-        this.setState({
-          current_user: body.current_user
-        })
+        this.setState({ current_user: body.current_user })
       }
     })
     .catch(error => console.error(`Fetch error: ${error.message}`));
