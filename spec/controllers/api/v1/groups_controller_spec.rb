@@ -10,7 +10,6 @@ RSpec.describe Api::V1::GroupsController, type: :controller do
 
   describe "GET#index" do
     it "should return a list of all groups" do
-
       sign_in admin
 
       get :index
@@ -18,10 +17,10 @@ RSpec.describe Api::V1::GroupsController, type: :controller do
       expect(response.status).to eq 200
       expect(response.content_type).to eq("application/json")
 
-      expect(returned_json.length).to eq 2
+      expect(returned_json.length).to eq 1
+
       expect(returned_json["groups"][0]["name"]).to eq group1.name
       expect(returned_json["groups"][1]["name"]).to eq group2.name
-      expect(returned_json["current_user"]["first_name"]).to eq admin.first_name
     end
   end
 end

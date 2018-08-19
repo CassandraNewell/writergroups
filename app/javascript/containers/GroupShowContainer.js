@@ -56,6 +56,10 @@ class GroupShowContainer extends Component {
    );
   }
 
+  componentWillUnmount() {
+    App.cable.subscriptions.remove(App.ChatChannel)
+  }
+
   onMessageSubmit(payload) {
     App.ChatChannel.send({
       message: payload,
@@ -64,9 +68,6 @@ class GroupShowContainer extends Component {
   }
 
   onManuscriptSubmit(payload) {
-    console.log("POST payload")
-    console.log(payload)
-
     fetch(`/api/v1/manuscripts`, {
       method: 'POST',
       body: payload,
