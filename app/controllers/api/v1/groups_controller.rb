@@ -1,16 +1,18 @@
 class Api::V1::GroupsController < ApiController
-  before_action :authorize_user
+  before_action :authorize_user, except: [:index]
 
   def index
-    if params[:scope] == "memberOf"
-      selectedGroups = current_user.assoc_groups
-    elsif params[:scope] == "notMemberOf"
-      selectedGroups = Group.all - current_user.assoc_groups
-    else
-      selectedGroups = Group.all
+    if current_user
+      if params[:scope] == "memberOf"
+        selectedGroups = current_user.assoc_groups
+      elsif params[:scope] == "notMemberOf"
+        selectedGroups = Group.all - current_user.assoc_groups
+      else
+        selectedGroups = Group.all
+      end
     end
 
-    render json: {groups: serializeArray(selectedGroups, GroupSerializer)}
+    render json: { groups: serializeArray(selectedGroups, GroupSerializer) }
   end
 
   def show

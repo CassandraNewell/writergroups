@@ -1,13 +1,14 @@
 class Api::V1::UsersController < ApiController
-  def index
-    render json: User.all
-  end
+  before_action :authorize_user, except: [:index]
 
-  def show
-    if current_user
-      render json: {current_user: current_user}
-    else
-      render json: {current_user: nil}
+  def index
+    if params[:scope] == "checkUser"
+      if current_user
+        user_info = SimpleUserSerializer.new(current_user)
+        render json: { current_user: user_info }
+      else
+        render json: { current_user: nil }
+      end
     end
   end
 end

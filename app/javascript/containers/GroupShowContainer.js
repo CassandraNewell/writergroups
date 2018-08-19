@@ -56,6 +56,10 @@ class GroupShowContainer extends Component {
    );
   }
 
+  componentWillUnmount() {
+    App.cable.subscriptions.remove(App.ChatChannel)
+  }
+
   onMessageSubmit(payload) {
     App.ChatChannel.send({
       message: payload,
