@@ -8,3 +8,4 @@ Heroku: https://writergroups.herokuapp.com/
 
 ## ER Diagram
 https://docs.google.com/drawings/d/1zepcDKhC9Mk-hVBTovL2qDCS4bKqh3e0Rih0GtfCZGY/edit
+ tiny change
