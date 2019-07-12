@@ -17,15 +17,7 @@ ActiveRecord::Schema.define(version: 2018_08_15_184528) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name", null: false
-    t.string "description", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "owner_id", null: false
-  end
-
-  create_table "manuscripts", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "description"
+    t.string "ddescription"
     t.bigint "user_id", null: false
     t.bigint "group_id", null: false
     t.datetime "created_at", null: false
